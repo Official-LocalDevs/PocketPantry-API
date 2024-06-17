@@ -1,6 +1,17 @@
-# API Endpoint Documentation
 
-This document outlines the usage of the API endpoints for the Places service. These endpoints allow clients to query place data stored in our database.
+![PocketPantry API by LocalDevs-3](https://github.com/Official-LocalDevs/FeedNYC-API/assets/160681835/a5b78d1e-8cf7-4f0d-aafb-a7bcd3179bff)
+
+
+
+🎉🎉🎉 Our API Documentation is on Apiary! Check it out [here](https://thepocketpantry.docs.apiary.io/#)! 🎉🎉🎉
+
+
+This document outlines the usage of the Pocket Pantry API. Pocket Pantry is a project by Local Devs that aims to centralize information about food assistance programs in New York City. 
+
+👉 Check out & Star the project on [Github](https://github.com/Official-LocalDevs/FeedNYC-API/tree/main)!
+
+👉 Learn more about [LocalDevs](localdevs.city) and follow us on [LinkedIn](https://www.linkedin.com/company/localdevs)!
+
 
 ## Endpoints
 
