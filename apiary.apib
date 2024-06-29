@@ -12,16 +12,16 @@ This document outlines the usage of the Pocket Pantry API. Pocket Pantry is a pr
 ## Endpoints
 
 
-| Route  | Parameters | Value Restrictions | Description | Link
-| ------------- | ------------- | ------------- | ------------- | ------------- |
-|   `/getAll`  | N/A | N/A |Retrieves all food pantries and soup kitchens | [Go to Section](#reference/0/get-all-places) |
-| `/id/{id}` | id (string) | N/A | Retrieves a place based on a unique ID | [Go to Section](#reference/0/get-place-by-id) |
-| `/borough/{borough}`  | borough (string) | `Queens`, `Brooklyn`, `Bronx`, `Manhattan`, `Staten Island` | Retrieves places based on the borough. | [Go to Section](#reference/0/get-places-by-borough) |
-| `/tags/{tags}` | tags (string) | `Halal`, `Kosher`, `Vegetarian`, `HIV` | Retrieves places associated with specific tags | [Go to Section](#reference/0/get-places-by-tags) |
-| `/type/{type}`| type (string) | `food_pantry`, `soup_kitchen` |List of Related pictures | [Go to Section](#reference/0/get-places-by-type)  |
-| `/time/{open}/{close} | open (string), close (string) | N/A | Retrieves places based on their open and closing times | [Go to Section](#reference/0/get-places-by-operating-times) |
-| `/days/{days}` | days (string) | `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday` | Retrieved list of places based on whether or not they are open on a specific day | N/A |
-| `/search` | N/A | N/A | Search route using query parameters | N/A |
+| Route  | Description | Link
+| ------------- | ------------- | ------------- |
+|   `/getAll`  |Retrieves all food pantries and soup kitchens | [Go to Section](#reference/0/get-all-places) |
+| `/id/{id}` | Retrieves a place based on a unique ID | [Go to Section](#reference/0/get-place-by-id) |
+| `/borough/{borough}`  | Retrieves places based on the borough | [Go to Section](#reference/0/get-places-by-borough) |
+| `/tags/{tags}` | Retrieves places associated with specific tags | [Go to Section](#reference/0/get-places-by-tags) |
+| `/type/{type}`|List of Related pictures | [Go to Section](#reference/0/get-places-by-type)  |
+| `/time/{open}/{close}` | Retrieves places based on their open and closing times | [Go to Section](#reference/0/get-places-by-operating-times) |
+| `/days/{days}` | Retrieved list of places based on whether or not they are open on a specific day | N/A |
+| `/search` | Search route using query parameters | N/A |
 
 ### Comments
 
@@ -31,6 +31,9 @@ This document outlines the usage of the Pocket Pantry API. Pocket Pantry is a pr
 
 ### Get All Places [/getAll]
 **Retrieves all places from the database**
+
+#### Example
+* `/getAll`
 
 #### Fetch Resource [GET]
 
@@ -77,6 +80,10 @@ This document outlines the usage of the Pocket Pantry API. Pocket Pantry is a pr
 #### Parameters
 * `id` (string)
     * must be a valid id for an existing place
+
+#### Examples
+* `/id/660a91248747cd35103e54be` (valid)
+* `/id/1` (invalid - there is no place with an id of 1)
 
 #### Fetch Resource [GET]
 
