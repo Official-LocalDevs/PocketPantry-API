@@ -27,7 +27,13 @@ Base URL: https://feednyc.onrender.com/api/places
 
 
 ### Get All Places [/getAll]
-**Retrieves all places from the database**
+
+#### Endpoint
+`GET /getAll`
+
+#### Description 
+
+Retrieves all places from the database
 
 #### Example
 
@@ -75,8 +81,12 @@ Base URL: https://feednyc.onrender.com/api/places
 
 ### Get Place by ID [/id/{id}]
 
+#### Endpoint
+`GET /id/{id}`
 
-**Retrieves a place based on a unique ID**
+#### Description 
+
+Retrieves a place based on a unique ID
 
 #### Parameters
 
@@ -128,7 +138,12 @@ Base URL: https://feednyc.onrender.com/api/places
 
 ### Get Places by Borough [/borough/{borough}]
 
-**Retrieves places based on the borough**
+#### Endpoint
+`GET /borough/{borough}`
+
+#### Description 
+
+Retrieves places based on the borough
 
 #### Parameters
 | Parameter  | Type   | Enum Values                                         | Description                 |
@@ -185,8 +200,12 @@ Base URL: https://feednyc.onrender.com/api/places
     ```
 
 ### Get Places by Tags [/tags/{tags}]
+#### Endpoint
+`GET /tags/{tags}`
 
-**Retrieves places associated with specific tags**
+#### Description 
+
+Retrieves places associated with specific tags
 
 #### Parameters
 | Parameter | Type   | Enum Values                               | Description                                      |
@@ -247,7 +266,12 @@ Base URL: https://feednyc.onrender.com/api/places
 
 ### Get Places by Type [/type/{type}]
 
-**Retrieves places by their type**
+#### Endpoint
+`GET /type/{type}`
+
+#### Description 
+
+Retrieves places by their type
 
 #### Parameters
 | Parameter | Type   | Enum Values                | Description                    |
@@ -329,7 +353,12 @@ Base URL: https://feednyc.onrender.com/api/places
 
 ### Get Places by Operating Times [/time/{open}/{close}]
 
-**Retrieves places based on their open and closing times**
+#### Endpoint
+`GET /time/{open}/{close}`
+
+#### Description 
+
+Retrieves places based on their open and closing times
 
 #### Parameters
 | Parameter | Type   | Format | Description                                      |
@@ -374,7 +403,11 @@ Base URL: https://feednyc.onrender.com/api/places
 
 ### Get Places by Day [/days/{days}]
 
-**Retrieves places based on what days they are open on**
+#### Endpoint
+`GET /days/{days}`
+
+#### Description 
+Retrieves places based on what days they are open on
 
 #### Parameters
 | Parameter | Type   | Enum Values                                          | Description                                      |
@@ -461,7 +494,11 @@ Base URL: https://feednyc.onrender.com/api/places
     
 ### Search [/search]
 
-**Retrieves places based on a fuzzy search term**
+#### Endpoint
+`GET /search`
+
+#### Description 
+Retrieves places based on a fuzzy search term
 
 #### Parameters
 | Parameter | Type   | Description                                      |
