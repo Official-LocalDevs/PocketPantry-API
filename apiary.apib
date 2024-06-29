@@ -1,0 +1,320 @@
+FORMAT: 1A
+HOST: https://feednyc.onrender.com/api/places/
+
+# Pocket Pantry API
+
+This document outlines the usage of the Pocket Pantry API. Pocket Pantry is a project by Local Devs that aims to centralize information about food assistance programs in New York City. 
+
+👉 Check out & Star the project on [Github](https://github.com/Official-LocalDevs/FeedNYC-API/tree/main)!
+
+👉 Learn more about [LocalDevs](localdevs.city) and follow us on [LinkedIn](https://www.linkedin.com/company/localdevs)!
+
+## Endpoints
+
+
+| Route  | Parameters | Value Restrictions | Description | Link
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+|   `/getAll`  | N/A | N/A |Retrieves all food pantries and soup kitchens | [Go to Section](#reference/0/get-all-places) |
+| `/id/{id}` | id (string) | N/A | Retrieves a place based on a unique ID | [Go to Section](#reference/0/get-place-by-id) |
+| `/borough/{borough}`  | borough (string) | `Queens`, `Brooklyn`, `Bronx`, `Manhattan`, `Staten Island` | Retrieves places based on the borough. | [Go to Section](#reference/0/get-places-by-borough) |
+| `/tags/{tags}` | tags (string) | `Halal`, `Kosher`, `Vegetarian`, `HIV` | Retrieves places associated with specific tags | [Go to Section](#reference/0/get-places-by-tags) |
+| `/type/{type}`| type (string) | `food_pantry`, `soup_kitchen` |List of Related pictures | [Go to Section](#reference/0/get-places-by-type)  |
+| `/time/{open}/{close} | open (string), close (string) | N/A | Retrieves places based on their open and closing times | [Go to Section](#reference/0/get-places-by-operating-times) |
+| `/days/{days}` | days (string) | `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday` | Retrieved list of places based on whether or not they are open on a specific day | N/A |
+| `/search` | N/A | N/A | Search route using query parameters | N/A |
+
+### Comments
+
+- `/search` is a route that uses query paramters. As of now the supported parameters are
+    - `name` = query paramter that allows for fuzzy name searching of a place (example: `/search?name=St.`
+
+
+### Get All Places [/getAll]
+**Retrieves all places from the database**
+
+#### Fetch Resource [GET]
+
++ Response 200 (application/json)
+    + Attributes (array[Place])
+    + Body
+    ```json
+    [
+      {
+        "_id": "660a91248747cd35103e54ba",
+        "name": "Al Hajjah Fajr Tyson Halal Food and Clothing Distribution Pantry",
+        "address": "2269 Crotona Ave, Bronx, NY, 10457",
+        "contact": "(646) 353-0859",
+        "tags": ["Halal"],
+        "hours": {
+          "food_pantry": {
+            "Monday": [{"_id": "664d493a8d28da79ee488277", "open": "13:00", "close": "17:00"}],
+            "Tuesday": [{"_id": "664d493a8d28da79ee488278", "open": "13:00", "close": "17:00"}],
+            "Wednesday": [{"_id": "664d493a8d28da79ee488279", "open": "13:00", "close": "17:00"}],
+            "Thursday": [{"_id": "664d493a8d28da79ee48827a", "open": "13:00", "close": "17:00"}],
+            "Friday": [{"_id": "664d493a8d28da79ee48827b", "open": "13:00", "close": "17:00"}],
+            "Saturday": [{"_id": "664d493a8d28da79ee48827c", "open": "13:00", "close": "17:00"}],
+            "Sunday": [{"_id": "664d493a8d28da79ee48827d", "open": "13:00", "close": "17:00"}]
+          },
+          "_id": "664d493a8d28da79ee48827e"
+        },
+        "borough": "Bronx",
+        "notes": []
+      }
+    ]
+    ```
+
++ Response 404 (application/json)
+    + Body
+    ```json
+    { "error": "Places not found" }
+    ```
+
+### Get Place by ID [/id/{id}]
+
+
+**Retrieves a place based on a unique ID**
+
+#### Parameters
+* `id` (string)
+    * must be a valid id for an existing place
+
+#### Fetch Resource [GET]
+
++ Parameters
+    + id: `660a91248747cd35103e54be` (string, required) - The ID of the place to retrieve.
++ URL Params: 
+    + Required: `id=[string]`
++ Data Params: None
+
++ Response 200 (application/json)
+    + Body
+    ```json
+    {
+      "tags": [],
+      "_id": "660a91248747cd35103e54be",
+      "name": "Calvary Delivery Christian Assembly",
+      "address": "737-739 Concourse Village West Bronx, NY, 10451",
+      "contact": "(347) 658-4459",
+      "notes": [
+        {
+          "_id": "664d47d88d28da79ee488198",
+          "for": "All",
+          "note": "Once a month, please call for date"
+        }
+      ],
+      "borough": "Bronx"
+    }
+    ```
+
++ Response 404 (application/json)
+    + Body
+    ```json
+    { "error": "Place not found" }
+    ```
+
+### Get Places by Borough [/borough/{borough}]
+
+**Retrieves places based on the borough**
+
+#### Parameters
+* `borough` (string)
+    * accepted values: `Queens`, `Brooklyn`, `Bronx`, `Manhattan`, `Staten Island`
+
+#### Examples
+* `/borough/Queens` (valid)
+* `/borough/Brooklyn`(valid)
+* `/borough/Brook` (invalid - not a real borough in NYC)
+
+#### Fetch Resource [GET]
++ Parameters
+    + borough: `Bronx` (string, required) - The borough to filter places by.
++ URL Params: 
+    + Required: `borough=[string]`
++ Data Params: None
+
++ Response 200 (application/json)
+    + Attributes (array[Place])
+    + Body
+    ```json
+    {
+      "_id": "660a91248747cd35103e54ba",
+      "name": "Al Hajjah Fajr Tyson Halal Food and Clothing Distribution Pantry",
+      "address": "2269 Crotona Ave, Bronx, NY, 10457",
+      "contact": "(646) 353-0859",
+      "tags": ["Halal"],
+      "hours": {
+        "food_pantry": {
+          "Monday": [{"_id": "664d3fd55163ad574f6d9bd4", "open": "13:00", "close": "17:00"}],
+          "Tuesday": [{"_id": "664d3fd55163ad574f6d9bd5", "open": "13:00", "close": "17:00"}],
+          "Wednesday": [{"_id": "664d3fd55163ad574f6d9bd6", "open": "13:00", "close": "17:00"}],
+          "Thursday": [{"_id": "664d3fd55163ad574f6d9bd7", "open": "13:00", "close": "17:00"}],
+          "Friday": [{"_id": "664d3fd55163ad574f6d9bd8", "open": "13:00", "close": "17:00"}],
+          "Saturday": [{"_id": "664d3fd55163ad574f6d9bd9", "open": "13:00", "close": "17:00"}],
+          "Sunday": [{"_id": "664d3fd55163ad574f6d9bda", "open": "13:00", "close": "17:00"}]
+        },
+        "_id": "664d3fd55163ad574f6d9bdb"
+      },
+      "borough": "Bronx",
+      "notes": []
+    }
+    ```
+
++ Response 404 (application/json)
+    + Body
+    ```json
+    { "error": "No places found in this borough" }
+    ```
+
+### Get Places by Tags [/tags/{tags}]
+
+**Retrieves places associated with specific tags**
+
+#### Parameters
+* tags (string) - comma separated string including all queries tags
+    * accepted values: `Halal`, `Kosher`, `Vegetarian`, `HIV`
+
+#### Examples
+    * `/tags/Halal,Kosher,Vegetarian` (valid)
+    * `/tags/Halal+Kosher+Vegetarian` (invalid - cannot use `+` to separate values)
+    * `/tags/Halal,Vegan` (invalid - Vegan is not an option)
+
+#### Fetch Resource [GET]
++ Parameters
+    + tags: `Halal` (string, required) - The tags to filter places by.
++ URL Params: 
+    + Required: `tags=[string]`
++ Data Params: None
+
++ Response 200 (application/json)
+    + Attributes (array[Place])
+    + Body
+    ```json
+    [
+      {
+        "_id": "660a91248747cd35103e54ba",
+        "name": "Al Hajjah Fajr Tyson Halal Food and Clothing Distribution Pantry",
+        "address": "2269 Crotona Ave, Bronx, NY, 10457",
+        "contact": "(646) 353-0859",
+        "tags": ["Halal"],
+        "hours": {
+          "food_pantry": {
+            "Monday": [{"_id": "664d47768d28da79ee488085", "open": "13:00", "close": "17:00"}],
+            "Tuesday": [{"_id": "664d47768d28da79ee488086", "open": "13:00", "close": "17:00"}],
+            "Wednesday": [{"_id": "664d47768d28da79ee488087", "open": "13:00", "close": "17:00"}],
+            "Thursday": [{"_id": "664d47768d28da79ee488088", "open": "13:00", "close": "17:00"}],
+            "Friday": [{"_id": "664d47768d28da79ee488089", "open": "13:00", "close": "17:00"}],
+            "Saturday": [{"_id": "664d47768d28da79ee48808a", "open": "13:00", "close": "17:00"}],
+            "Sunday": [{"_id": "664d47768d28da79ee48808b", "open": "13:00", "close": "17:00"}]
+          },
+          "_id": "664d47768d28da79ee48808c"
+        },
+        "borough": "Bronx",
+        "notes": []
+      }
+    ]
+    ```
+
++ Response 404 (application/json)
+    + Body
+    ```json
+    { "error": "No places found with these tags" }
+    ```
+
+### Get Places by Type [/type/{type}]
+
+**Retrieves places by their type**
+
+#### Parameters
+* type (string)
+    * accepted values: `food_pantry`, `soup_kitchen`
+
+#### Examples
+* `/type/food_pantry` (valid)
+* `/type/soup_kitchen` (valid)
+* `/type/foodPantry` (invalid - foodPantry is not an accepted value)
+* `/type/food_cart` (invalid - food_cart is not an accepted value)
+
+#### Fetch Resource [GET]
+
++ Parameters
+    + type: `food_pantry` (string, required) - The type of places to retrieve.
++ URL Params: 
+    + Required: `type=[string]`
++ Data Params: None
+
++ Response 200 (application/json)
+    + Body
+    ```json
+    [See relevant place data]
+    ```
+
++ Response 404 (application/json)
+    + Body
+    ```json
+    { "error": "No places found of this type" }
+    ```
+
+### Get Places by Operating Times [/time/{open}/{close}]
+
+**Retrieves places based on their open and closing times**
+
+#### Parameters
+* open(string)
+* close(string)
+
+##### Comments
+* *All parameters must be in 24 hour time, in hh:mm format, and in Eastern Time (NYC)*
+
+#### Examples
+* /time/13:00/17:00 (valid)
+* /time/03:00/07:00 (valid)
+* /time/12:00/01:00 (invalid - 01:00 is earlier than 12:00)
+* /time/12:00/1:00 (invalid - incorrect format)
+
+#### Fetch Resource [GET]
+
++ Parameters
+    + open: `13:00` (string, required) - Opening time to filter places by.
+    + close: `17:00` (string, required) - Closing time to filter places by.
++ URL Params: 
+    + Required: `open=[string], close=[string]`
++ Data Params: None
+
++ Response 200 (application/json)
+    + Body
+    ```json
+    [See relevant place data]
+    ```
+
++ Response 404 (application/json)
+    + Body
+    ```json
+    { "error": "No places found within these operating times" }
+    ```
+
+## Data Models
+
+### Place
++ Attributes
+    + _id: `660a91248747cd35103e54ba` (string, required)
+    + name: `Al Hajjah Fajr Tyson Halal Food and Clothing Distribution Pantry` (string, required)
+    + address: `2269 Crotona Ave, Bronx, NY, 10457` (string, required)
+    + contact: `(646) 353-0859` (string, required)
+    + tags: `["Halal"]` (array[string], optional)
+    + hours: `object` (object, required)
+        + food_pantry: `object` (object, required)
+            + Monday: `[{ "_id": "664d493a8d28da79ee488277", "open": "13:00", "close": "17:00" }]` (array[object], required)
+            + Tuesday: `[{ "_id": "664d493a8d28da79ee488278", "open": "13:00", "close": "17:00" }]` (array[object], required)
+            + Wednesday: `[{ "_id": "664d493a8d28da79ee488279", "open": "13:00", "close": "17:00" }]` (array[object], required)
+            + Thursday: `[{ "_id": "664d493a8d28da79ee48827a", "open": "13:00", "close": "17:00" }]` (array[object], required)
+            + Friday: `[{ "_id": "664d493a8d28da79ee48827b", "open": "13:00", "close": "17:00" }]` (array[object], required)
+            + Saturday: `[{ "_id": "664d493a8d28da79ee48827c", "open": "13:00", "close": "17:00" }]` (array[object], required)
+            + Sunday: `[{ "_id": "664d493a8d28da79ee48827d", "open": "13:00", "close": "17:00" }]` (array[object], required)
+    + borough: `Bronx` (string, required)
+    + notes: `[]` (array[object], optional)
+
+### Note
++ Attributes
+    + _id: `664d47d88d28da79ee488198` (string, required)
+    + for: `All` (string, required)
+    + note: `Once a month, please call for date` (string, required)
