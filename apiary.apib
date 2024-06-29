@@ -12,16 +12,16 @@ This document outlines the usage of the Pocket Pantry API. Pocket Pantry is a pr
 ## Endpoints
 
 
-| Route  | Description | Link
-| ------------- | ------------- | ------------- |
-|   `/getAll`  |Retrieves all food pantries and soup kitchens | [Go to Section](#reference/0/get-all-places) |
-| `/id/{id}` | Retrieves a place based on a unique ID | [Go to Section](#reference/0/get-place-by-id) |
-| `/borough/{borough}`  | Retrieves places based on the borough | [Go to Section](#reference/0/get-places-by-borough) |
-| `/tags/{tags}` | Retrieves places associated with specific tags | [Go to Section](#reference/0/get-places-by-tags) |
-| `/type/{type}`|List of Related pictures | [Go to Section](#reference/0/get-places-by-type)  |
-| `/time/{open}/{close}` | Retrieves places based on their open and closing times | [Go to Section](#reference/0/get-places-by-operating-times) |
-| `/days/{days}` | Retrieved list of places based on whether or not they are open on a specific day | N/A |
-| `/search` | Search route using query parameters | N/A |
+| Route                     | Description                                                                       | Link                                                          |
+| -------------             | -------------                                                                     | -------------                                                 |
+| `/getAll`                 | Retrieves all food pantries and soup kitchens                                     | [Go to Section](#reference/0/get-all-places)                  |
+| `/id/{id}`                | Retrieves a place based on a unique ID                                            | [Go to Section](#reference/0/get-place-by-id)                 |
+| `/borough/{borough}`      | Retrieves places based on the borough                                             | [Go to Section](#reference/0/get-places-by-borough)           |
+| `/tags/{tags}`            | Retrieves places associated with specific tags                                    | [Go to Section](#reference/0/get-places-by-tags)              |
+| `/type/{type}`            | List of Related pictures                                                          | [Go to Section](#reference/0/get-places-by-type)              |
+| `/time/{open}/{close}`    | Retrieves places based on their open and closing times                            | [Go to Section](#reference/0/get-places-by-operating-times)   |
+| `/days/{days}`            | Retrieved list of places based on whether or not they are open on a specific day  | [Go to Section](#reference/0/get-places-by-day)               |
+| `/search`                 | Search route using query parameters                                               | [Go to Section](#reference/0/search)                                                          |
 
 ### Comments
 
@@ -33,7 +33,11 @@ This document outlines the usage of the Pocket Pantry API. Pocket Pantry is a pr
 **Retrieves all places from the database**
 
 #### Example
-* `/getAll`
+
+| Example   | Description                                      |
+| --------- | ------------------------------------------------ |
+| `/getAll` | Retrieves all places from the database           |
+
 
 #### Fetch Resource [GET]
 
@@ -78,12 +82,18 @@ This document outlines the usage of the Pocket Pantry API. Pocket Pantry is a pr
 **Retrieves a place based on a unique ID**
 
 #### Parameters
-* `id` (string)
-    * must be a valid id for an existing place
+
+| Parameter | Type   | Description                              |
+| --------- | ------ | -------------------------------------    |
+| `id`      | string | Must be a valid ID for an existing place |
 
 #### Examples
-* `/id/660a91248747cd35103e54be` (valid)
-* `/id/1` (invalid - there is no place with an id of 1)
+
+| Example               | Validity       | Description                                      |
+| --------------------- | -------------- | ------------------------------------------------ |
+| `/id/660a91248747cd35103e54be` | Valid          | Retrieves a place with the specified ID           |
+| `/id/1`               | Invalid        | No place exists with an ID of 1                  |
+
 
 #### Fetch Resource [GET]
 
@@ -124,13 +134,18 @@ This document outlines the usage of the Pocket Pantry API. Pocket Pantry is a pr
 **Retrieves places based on the borough**
 
 #### Parameters
-* `borough` (string)
-    * accepted values: `Queens`, `Brooklyn`, `Bronx`, `Manhattan`, `Staten Island`
+| Parameter  | Type   | Enum Values                                         | Description                 |
+| ---------- | ------ | ---------------------------------------------------- | --------------------------- |
+| `borough`  | string | `Queens`, `Brooklyn`, `Bronx`, `Manhattan`, `Staten Island` | Specifies the borough of the place |
 
 #### Examples
-* `/borough/Queens` (valid)
-* `/borough/Brooklyn`(valid)
-* `/borough/Brook` (invalid - not a real borough in NYC)
+
+| Example                   | Validity       | Description                                      |
+| ------------------------- | -------------- | ------------------------------------------------ |
+| `/borough/Queens`         | Valid          | Retrieves places in the borough of Queens        |
+| `/borough/Brooklyn`       | Valid          | Retrieves places in the borough of Brooklyn      |
+| `/borough/Brook`          | Invalid        | 'Brook' is not a valid borough in NYC            |
+
 
 #### Fetch Resource [GET]
 + Parameters
@@ -177,13 +192,19 @@ This document outlines the usage of the Pocket Pantry API. Pocket Pantry is a pr
 **Retrieves places associated with specific tags**
 
 #### Parameters
-* tags (string) - comma separated string including all queries tags
-    * accepted values: `Halal`, `Kosher`, `Vegetarian`, `HIV`
+| Parameter | Type   | Enum Values                               | Description                                      |
+| --------- | ------ | ----------------------------------------- | ------------------------------------------------ |
+| `tags`    | string | `Halal`, `Kosher`, `Vegetarian`, `HIV Customers` | Comma-separated string including all query tags  |
 
 #### Examples
-    * `/tags/Halal,Kosher,Vegetarian` (valid)
-    * `/tags/Halal+Kosher+Vegetarian` (invalid - cannot use `+` to separate values)
-    * `/tags/Halal,Vegan` (invalid - Vegan is not an option)
+
+| Example                           | Validity       | Description                                      |
+| --------------------------------- | -------------- | ------------------------------------------------ |
+| `/tags/Halal,Kosher,Vegetarian`   | Valid          | Retrieves places with tags 'Halal', 'Kosher', and 'Vegetarian' |
+| `/tags/Halal`                     | Valid          | Retrieves places with the tag 'Halal'            |
+| `/tags/Halal+Kosher+Vegetarian`   | Invalid        | Cannot use `+` to separate tag values            |
+| `/tags/Halal,Vegan`               | Invalid        | 'Vegan' is not a valid tag option                |
+
 
 #### Fetch Resource [GET]
 + Parameters
@@ -232,14 +253,19 @@ This document outlines the usage of the Pocket Pantry API. Pocket Pantry is a pr
 **Retrieves places by their type**
 
 #### Parameters
-* type (string)
-    * accepted values: `food_pantry`, `soup_kitchen`
+| Parameter | Type   | Enum Values                | Description                    |
+| --------- | ------ | -------------------------- | ------------------------------ |
+| `type`    | string | `food_pantry`, `soup_kitchen` | Specifies the type of place    |
 
 #### Examples
-* `/type/food_pantry` (valid)
-* `/type/soup_kitchen` (valid)
-* `/type/foodPantry` (invalid - foodPantry is not an accepted value)
-* `/type/food_cart` (invalid - food_cart is not an accepted value)
+
+| Example                     | Validity       | Description                                      |
+| --------------------------- | -------------- | ------------------------------------------------ |
+| `/type/food_pantry`         | Valid          | Retrieves places of type 'food_pantry'           |
+| `/type/soup_kitchen`        | Valid          | Retrieves places of type 'soup_kitchen'          |
+| `/type/foodPantry`          | Invalid        | 'foodPantry' is not an accepted value            |
+| `/type/food_cart`           | Invalid        | 'food_cart' is not an accepted value             |
+
 
 #### Fetch Resource [GET]
 
@@ -252,7 +278,50 @@ This document outlines the usage of the Pocket Pantry API. Pocket Pantry is a pr
 + Response 200 (application/json)
     + Body
     ```json
-    [See relevant place data]
+    [
+        {
+            "_id": "660880ef8747cd9210f22d03",
+            "name": "CHURCH OF ST. NICHOLAS OF TOLENTINE",
+            "address": "2345 University Ave, Bronx, NY, 10468",
+            "contact": "(718) 295-6800",
+            "tags": [],
+            "hours": {
+                "food_pantry": {
+                    "Tuesday": [
+                        {
+                            "_id": "668051da4899dda2c55ddc3c",
+                            "open": "09:00",
+                            "close": "11:00"
+                        }
+                    ]
+                },
+                "_id": "668051da4899dda2c55ddc3d"
+            },
+            "borough": "Bronx",
+            "notes": []
+        },
+        {
+            "_id": "660880f28747cd9210f22d04",
+            "name": "BREAD OF LIFE FOOD PANTRY",
+            "address": "1104 Elder Ave, Bronx, NY, 10472",
+            "contact": "(347) 235-3723",
+            "tags": [],
+            "hours": {
+                "food_pantry": {
+                    "Saturday": [
+                        {
+                            "_id": "668051da4899dda2c55ddc3e",
+                            "open": "13:30",
+                            "close": "16:30"
+                        }
+                    ]
+                },
+                "_id": "668051da4899dda2c55ddc3f"
+            },
+            "borough": "Bronx",
+            "notes": []
+        }
+    ]
     ```
 
 + Response 404 (application/json)
@@ -266,17 +335,24 @@ This document outlines the usage of the Pocket Pantry API. Pocket Pantry is a pr
 **Retrieves places based on their open and closing times**
 
 #### Parameters
-* open(string)
-* close(string)
+| Parameter | Type   | Format | Description                                      |
+| --------- | ------ | ------ | ------------------------------------------------ |
+| `open`    | string | hh:mm  | Open time in 24-hour format, Eastern Time (NYC)  |
+| `close`   | string | hh:mm  | Close time in 24-hour format, Eastern Time (NYC) |
 
 ##### Comments
-* *All parameters must be in 24 hour time, in hh:mm format, and in Eastern Time (NYC)*
+* All parameters must be in 24-hour time, in hh:mm format, and in Eastern Time (NYC).
+* `close` time must be later than `open` time.
 
 #### Examples
-* `/time/13:00/17:00` (valid)
-* `/time/03:00/07:00` (valid)
-* `/time/12:00/01:00` (invalid - 01:00 is earlier than 12:00)
-* `/time/12:00/1:00` (invalid - incorrect format)
+
+| Example                 | Validity       | Description                                      |
+| ----------------------- | -------------- | ------------------------------------------------ |
+| `/time/13:00/17:00`     | Valid          | Retrieves places open from 13:00 to 17:00        |
+| `/time/03:00/07:00`     | Valid          | Retrieves places open from 03:00 to 07:00        |
+| `/time/12:00/01:00`     | Invalid        | Close time '01:00' is earlier than open time '12:00' |
+| `/time/12:00/1:00`      | Invalid        | Incorrect format for '1:00', should be '01:00'    |
+
 
 #### Fetch Resource [GET]
 
@@ -291,6 +367,173 @@ This document outlines the usage of the Pocket Pantry API. Pocket Pantry is a pr
     + Body
     ```json
     [See relevant place data]
+    ```
+
++ Response 404 (application/json)
+    + Body
+    ```json
+    { "error": "No places found within these operating times" }
+    ```
+
+### Get Places by Day [/days/{days}]
+
+**Retrieves places based on what days they are open on**
+
+#### Parameters
+| Parameter | Type   | Enum Values                                          | Description                                      |
+| --------- | ------ | ---------------------------------------------------- | ------------------------------------------------ |
+| `days`    | string | `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday` | Days of the week places are open                 |
+
+#### Examples
+
+| Example                           | Validity       | Description                                      |
+| --------------------------------- | -------------- | ------------------------------------------------ |
+| `/days/Monday,Tuesday,Friday`     | Valid          | Retrieves places open on Monday, Tuesday, and Friday |
+| `/days/Monday`                   | Valid          | Retrieves places open on Monday                  |
+| `/days/Monday,Twosday`           | Invalid        | 'Twosday' is not a valid day                     |
+
+
+#### Fetch Resource [GET]
++ Parameters
+    + days: `Monday,Tuesday` (string, required) - Days to filter places by
++ URL Params: 
+    + Required: `days=[string]`
++ Data Params: None
+
++ Response 200 (application/json)
+    + Body
+    ```json
+    [
+        {
+            "_id": "660880ef8747cd9210f22d03",
+            "name": "CHURCH OF ST. NICHOLAS OF TOLENTINE",
+            "address": "2345 University Ave, Bronx, NY, 10468",
+            "contact": "(718) 295-6800",
+            "tags": [],
+            "hours": {
+                "food_pantry": {
+                    "Tuesday": [
+                        {
+                            "_id": "6680514f4899dda2c55dd6c6",
+                            "open": "09:00",
+                            "close": "11:00"
+                        }
+                    ]
+                },
+                "_id": "6680514f4899dda2c55dd6c7"
+            },
+            "borough": "Bronx",
+            "notes": []
+        },
+        {
+            "_id": "660881008747cd9210f22d06",
+            "name": "GOD BLESS YOU ALL INC (QUEENS)",
+            "address": "95-31 Jamaica Ave, Woodhaven, NY, 11421",
+            "contact": "(347) 349-2720",
+            "tags": [],
+            "hours": {
+                "food_pantry": {
+                    "Monday": [
+                        {
+                            "_id": "6680514f4899dda2c55dd6c8",
+                            "open": "11:00",
+                            "close": "15:00"
+                        }
+                    ],
+                    "Wednesday": [
+                        {
+                            "_id": "6680514f4899dda2c55dd6c9",
+                            "open": "11:00",
+                            "close": "15:00"
+                        }
+                    ]
+                },
+                "_id": "6680514f4899dda2c55dd6ca"
+            },
+            "borough": "Queens",
+            "notes": []
+        }
+    ]
+    ```
+
++ Response 404 (application/json)
+    + Body
+    ```json
+    { "error": "No places found within these operating times" }
+    ```
+    
+### Search [/search]
+
+**Retrieves places based on a fuzzy search term**
+
+#### Parameters
+| Parameter | Type   | Description                                      |
+| --------- | ------ | ------------------------------------------------ |
+| `name`    | string | Fuzzy search term to search for places by name   |
+
+#### Examples
+
+| Example                   | Validity       | Description                                      |
+| ------------------------- | -------------- | ------------------------------------------------ |
+| `/search?name=St.`        | Valid          | Retrieves places with names containing 'St.'      |
+| `/search?name=Mar`        | Valid          | Retrieves places with names containing 'Mar'      |
+
+
+#### Fetch Resource [GET]
+
++ Parameters
+    + name: `St.` (string, required) - Fuzzy search term to filter places by
++ URL Params: 
+    + Required: `name=[string]`
++ Data Params: None
+
++ Response 200 (application/json)
+    + Body
+    ```json
+    [
+            {
+            "_id": "6608813a8747cd9210f22d10",
+            "name": "ST. PETER'S CHURCH BREAKFAST PROGRAM",
+            "address": "619 Lexington Ave, New York, NY, 10022",
+            "contact": "(212) 935-2200",
+            "tags": [],
+            "hours": {
+                "soup_kitchen": {
+                    "Tuesday": [
+                        {
+                            "_id": "668054954899dda2c55de5c8",
+                            "open": "07:15",
+                            "close": "08:00"
+                        }
+                    ]
+                },
+                "_id": "668054954899dda2c55de5c9"
+            },
+            "borough": "Manhattan",
+            "notes": []
+        },
+        {
+            "_id": "6608813e8747cd9210f22d11",
+            "name": "CHRIST CHURCH UNITED METHODIST",
+            "address": "524 Park Ave, New York, NY, 10065",
+            "contact": "(212) 838-3036",
+            "tags": [],
+            "hours": {
+                "soup_kitchen": {
+                    "Sunday": [
+                        {
+                            "_id": "668054954899dda2c55de5ca",
+                            "open": "16:30",
+                            "close": "18:00"
+                        }
+                    ]
+                },
+                "_id": "668054954899dda2c55de5cb"
+            },
+            "borough": "Manhattan",
+            "notes": []
+        },
+    ]
     ```
 
 + Response 404 (application/json)
