@@ -5,11 +5,12 @@ HOST: https://feednyc.onrender.com/api/places/
 
 This document outlines the usage of the Pocket Pantry API. Pocket Pantry is a project by Local Devs that aims to centralize information about food assistance programs in New York City.
 
-Base URL: https://feednyc.onrender.com/api/places
-
 👉 Check out & Star the project on [Github](https://github.com/Official-LocalDevs/FeedNYC-API/tree/main)!
 
 👉 Learn more about [LocalDevs](localdevs.city) and follow us on [LinkedIn](https://www.linkedin.com/company/localdevs)!
+
+## Base URL
+**https://feednyc.onrender.com/api/places**
 
 ## Endpoints
 
@@ -24,6 +25,21 @@ Base URL: https://feednyc.onrender.com/api/places
 | `/time/{open}/{close}`    | Retrieves places based on their open and closing times                            | [Go to Section](#reference/0/get-places-by-operating-times)   |
 | `/days/{days}`            | Retrieved list of places based on whether or not they are open on a specific day  | [Go to Section](#reference/0/get-places-by-day)               |
 | `/search`                 | Search route using query parameters                                               | [Go to Section](#reference/0/search)                          |
+
+
+### With Base URL
+
+| Route                       | Full URL                                                      |
+| --------------------------- | ------------------------------------------------------------- |
+| `/getAll`                   | https://feednyc.onrender.com/api/places/getAll                |
+| `/id/{id}`                  | https://feednyc.onrender.com/api/places/id/{id}               |
+| `/borough/{borough}`        | https://feednyc.onrender.com/api/places/borough/{borough}     |
+| `/tags/{tags}`              | https://feednyc.onrender.com/api/places/tags/{tags}           |
+| `/type/{type}`              | https://feednyc.onrender.com/api/places/type/{type}           |
+| `/time/{open}/{close}`      | https://feednyc.onrender.com/api/places/time/{open}/{close}   |
+| `/days/{days}`              | https://feednyc.onrender.com/api/places/days/{days}           |
+| `/search`                   | https://feednyc.onrender.com/api/places/search                |
+
 
 
 ### Get All Places [/getAll]
