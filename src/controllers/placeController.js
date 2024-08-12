@@ -14,8 +14,15 @@ const getPlaces = async (req, res) => {
 
 //Endpoint to get place by ID
 const getPlaceById = async (req, res) => {
+  const id = req.params.id;
+
+  const objectIdRegex = /^[a-fA-F0-9]{24}$/;
+  if (!objectIdRegex.test(id)) {
+    return res.status(400).json({ message: "Invalid ID format" });
+  }
+
   try {
-    const place = await Place.findById(req.params.id);
+    const place = await Place.findById(id);
     if (place) {
       res.status(200).json(place);
     } else {
