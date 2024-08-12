@@ -1,6 +1,5 @@
 const placeRoutes = require("./routes/placeRoutes");
 const express = require("express");
-require("dotenv").config();
 
 const createApp = () => {
   const app = express();

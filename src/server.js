@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const createApp = require("./createApp");
+require("dotenv").config();
 
 //connecting to mongo
 mongoose

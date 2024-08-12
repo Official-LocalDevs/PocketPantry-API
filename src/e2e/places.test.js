@@ -1,6 +1,7 @@
 const request = require("supertest");
 const createApp = require("../createApp");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 describe("/api/places", () => {
   let app;
