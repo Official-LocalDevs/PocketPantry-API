@@ -11,7 +11,7 @@ const response = {
 
 const mockData = [
   {
-    _id: "1",
+    _id: "64d9312fe5a2b6f9a7c7d1e8",
     name: "Place 1",
     tags: ["HIV Customers"],
     hours: {
@@ -27,7 +27,7 @@ const mockData = [
     borough: "Queens",
   },
   {
-    _id: "2",
+    _id: "64d9312fe5a2b6f9a7c7d1e9",
     name: "Place 2",
     tags: ["Kosher", "Halal"],
     hours: {
@@ -43,7 +43,7 @@ const mockData = [
     borough: "Queens",
   },
   {
-    _id: "3",
+    _id: "64d9312fe5a2b6f9a7c7d1ea",
     name: "Place 3",
     tags: ["Halal"],
     hours: {
@@ -59,7 +59,7 @@ const mockData = [
     borough: "Brooklyn",
   },
   {
-    _id: "4",
+    _id: "64d9312fe5a2b6f9a7c7d1eb",
     name: "Place 4",
     tags: [],
     hours: {
@@ -75,7 +75,7 @@ const mockData = [
     borough: "Manhattan",
   },
   {
-    _id: "5",
+    _id: "64d9312fe5a2b6f9a7c7d1ec",
     name: "Area 51",
     tags: [],
     hours: {
@@ -122,7 +122,7 @@ it("should get all places", async () => {
 
 it("should get place by id", async () => {
   // Mock the Places.findById method to return a single item from mockData
-  const placeId = "1"; // Use the actual ID from mockData for a realistic test
+  const placeId = "64d9312fe5a2b6f9a7c7d1ea"; // Use the actual ID from mockData for a realistic test
   const place = mockData.find((item) => item._id === placeId); // Find the item with the specified ID
   Places.findById.mockResolvedValue(place);
 
@@ -143,11 +143,26 @@ it("should throw error if place by id not found", async () => {
   Places.findById.mockResolvedValue(null);
 
   // Call the getPlaceById controller method
-  await placeController.getPlaceById({ params: { id: 1 } }, response);
+  await placeController.getPlaceById(
+    { params: { id: "64d9324fe5a2b6f9a7c7d1ed" } },
+    response
+  );
 
   // Assertions
   expect(response.status).toHaveBeenCalledWith(404);
   expect(response.json).toHaveBeenCalledWith({ message: "Place not found" });
+});
+
+it("should throw error if invalid id format is provided", async () => {
+  // Call the getPlaceById controller method
+  await placeController.getPlaceById(
+    { params: { id: "invalid-id" } },
+    response
+  );
+
+  // Assertions
+  expect(response.status).toHaveBeenCalledWith(400);
+  expect(response.json).toHaveBeenCalledWith({ message: "Invalid ID format" });
 });
 
 it("should get places by borough", async () => {
