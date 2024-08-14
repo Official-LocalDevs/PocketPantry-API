@@ -5,6 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "test": "jest",
+    "test:unit": "jest --testPathPattern=src/__tests__",
     "test:e2e": "jest --testPathPattern=src/e2e",
     "start": "node src/server.js",
     "dev": "nodemon"
