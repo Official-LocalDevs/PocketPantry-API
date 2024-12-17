@@ -1,11 +1,6 @@
-const express = require("express");
 const mongoose = require("mongoose");
-require('dotenv').config()
-
-const app = express();
-app.use(express.json());
-
-const placeRoutes = require("./routes/placeRoutes");
+const createApp = require("./createApp");
+require("dotenv").config();
 
 //connecting to mongo
 mongoose
@@ -13,7 +8,7 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
-app.use("/api/places", placeRoutes);
+const app = createApp();
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server is running on port ${port}`));
